@@ -1,32 +1,31 @@
 # Social Media Marketing Campaign Analysis
 
-A complete exploratory data analysis (EDA) of a 6-month social media campaign across **Instagram, Twitter, and Facebook** — uncovering what content works, when to post, and which platform delivers the best ROI.
+A complete analysis of a 6-month social media campaign across **Instagram, Twitter, and Facebook** — done in **two tools** to demonstrate a full data analyst skill set.
 
 ---
 
-##  Project Overview
+## Project Overview
 
 | Detail | Info |
 |---|---|
 | **Dataset** | Simulated campaign data (2,000 posts) |
 | **Timeframe** | 6 months |
 | **Platforms** | Instagram, Twitter, Facebook |
-| **Tools** | Python, Pandas, NumPy, Matplotlib, Seaborn |
-| **Deliverable** | Jupyter Notebook + visualizations |
+| **Tools** | Python (Pandas, Matplotlib, Seaborn) · SQL (SQLite / PostgreSQL) |
 
 ---
 
-##  Key Questions Answered
+## Key Questions Answered
 
 1. Which platform drives the most reach and engagement?
 2. What content type (Video, Image, Carousel, Story, Text) performs best?
 3. What is the best time and day to post?
 4. Is there a relationship between reach and engagement rate?
-5. Which platform converts best?
+5. Which platform + content type combo converts best?
 
 ---
 
-##  Key Findings
+## Key Findings
 
 - **Instagram** achieves the highest average reach per post
 - **Video content** has the highest engagement rate (~12% avg) across all platforms
@@ -37,14 +36,15 @@ A complete exploratory data analysis (EDA) of a 6-month social media campaign ac
 
 ---
 
-##  Project Structure
+## Project Structure
 
 ```
 social-media-analysis/
 │
-├── social_media_analysis.ipynb   # Main analysis notebook
-├── social_media_data.csv         # Generated dataset (created on run)
-├── plots/                        # Saved chart images
+├── social_media_analysis.ipynb   # Python EDA — charts & visualizations
+├── social_media_analysis.sql     # SQL analysis — same questions, pure queries
+├── social_media_data.csv         # Generated dataset (created on notebook run)
+├── plots/                        # Saved chart images from Python notebook
 │   ├── 01_distributions.png
 │   ├── 02_monthly_trend.png
 │   ├── 03_platform_comparison.png
@@ -58,7 +58,7 @@ social-media-analysis/
 
 ---
 
-##  How to Run
+## Python Analysis — How to Run
 
 1. **Clone the repo**
    ```bash
@@ -71,32 +71,55 @@ social-media-analysis/
    pip install pandas numpy matplotlib seaborn jupyter
    ```
 
-3. **Create the plots folder**
+3. **Create plots folder & launch Jupyter**
    ```bash
    mkdir plots
-   ```
-
-4. **Launch Jupyter**
-   ```bash
    jupyter notebook social_media_analysis.ipynb
    ```
 
-5. **Run all cells** — the dataset is generated automatically (no external data needed!)
+4. **Run all cells** — dataset is generated automatically, no external data needed!
 
 ---
 
-##  Skills Demonstrated
+## SQL Analysis — How to Run
 
-- Data generation & simulation with NumPy
-- Data cleaning & feature engineering with Pandas
+### Option A — SQLite (simplest, no setup needed)
+```bash
+sqlite3 social_media.db
+.mode csv
+.import social_media_data.csv social_media
+.read social_media_analysis.sql
+```
+
+### Option B — PostgreSQL
+```sql
+\copy social_media FROM 'social_media_data.csv' CSV HEADER;
+```
+Then run the `.sql` file in pgAdmin or psql.
+
+### Option C — Online (no install)
+Upload `social_media_data.csv` to [sqliteonline.com](https://sqliteonline.com) or [DB Fiddle](https://www.db-fiddle.com) and paste queries directly.
+
+---
+
+## Skills Demonstrated
+
+**Python**
+- Data simulation & feature engineering with NumPy & Pandas
 - Exploratory Data Analysis (EDA)
-- Data visualization with Matplotlib & Seaborn
-- Business insight communication
-- Markdown documentation
+- Data visualization (bar, line, scatter, heatmap, boxplot, pie)
+
+**SQL**
+- Aggregations, GROUP BY, ORDER BY
+- Window functions (RANK, LAG for month-over-month trends)
+- CASE statements for custom time bucketing
+- Subqueries & correlated subqueries
+- Business-focused query writing
 
 ---
 
-##  Contact
+## Contact
 
 Lia Saiyan
-[LinkedIn](https://www.linkedin.com/in/lia-saiyan/) · [Email](liasaiyan@gmail.com) 
+
+[LinkedIn](https://www.linkedin.com/in/lia-saiyan/) · [Email](liasaiyan@gmai.com) 
