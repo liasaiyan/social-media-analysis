@@ -3,12 +3,9 @@
 --  1. Load the CSV into a database table called `social_media`
 --     (see README for instructions per database)
 --  2. Run each section in order, or individually
--- ============================================================
 
 
--- ============================================================
 -- 0. CREATE TABLE & LOAD DATA (SQLite example)
--- ============================================================
 
 CREATE TABLE IF NOT EXISTS social_media (
     date             TEXT,
@@ -29,9 +26,7 @@ CREATE TABLE IF NOT EXISTS social_media (
 );
 
 
--- ============================================================
 -- 1. DATA OVERVIEW
--- ============================================================
 
 -- Total number of posts
 SELECT COUNT(*) AS total_posts
@@ -61,9 +56,7 @@ SELECT
 FROM social_media;
 
 
--- ============================================================
 -- 2. OVERALL CAMPAIGN PERFORMANCE
--- ============================================================
 
 SELECT
     COUNT(*)                            AS total_posts,
@@ -77,9 +70,7 @@ SELECT
 FROM social_media;
 
 
--- ============================================================
 -- 3. PLATFORM PERFORMANCE COMPARISON
--- ============================================================
 
 -- Core metrics per platform
 SELECT
@@ -115,9 +106,7 @@ GROUP BY platform
 ORDER BY conversions_per_1k_reach DESC;
 
 
--- ============================================================
 -- 4. CONTENT TYPE ANALYSIS
--- ============================================================
 
 -- Performance by content type
 SELECT
@@ -156,9 +145,7 @@ ORDER BY engagement_rate DESC
 LIMIT 5;
 
 
--- ============================================================
 -- 5. BEST TIME TO POST
--- ============================================================
 
 -- Engagement rate by hour of day
 SELECT
@@ -193,14 +180,14 @@ GROUP BY day_of_week
 ORDER BY avg_engagement_rate_pct DESC;
 
 
--- Time bucket analysis (Morning / Afternoon / Evening / Night)
+-- Time bucket analysis 
 SELECT
     CASE
-        WHEN hour BETWEEN 0  AND 5  THEN '🌙 Night (0-5)'
-        WHEN hour BETWEEN 6  AND 11 THEN '🌅 Morning (6-11)'
-        WHEN hour BETWEEN 12 AND 17 THEN '☀️ Afternoon (12-17)'
-        WHEN hour BETWEEN 18 AND 20 THEN '🌆 Evening (18-20)'
-        ELSE                             '🌃 Late Night (21-23)'
+        WHEN hour BETWEEN 0  AND 5  THEN 'Night (0-5)'
+        WHEN hour BETWEEN 6  AND 11 THEN 'Morning (6-11)'
+        WHEN hour BETWEEN 12 AND 17 THEN 'Afternoon (12-17)'
+        WHEN hour BETWEEN 18 AND 20 THEN 'Evening (18-20)'
+        ELSE                             'Late Night (21-23)'
     END                                 AS time_bucket,
     COUNT(*)                            AS posts,
     ROUND(AVG(engagement_rate), 2)      AS avg_engagement_rate_pct,
@@ -210,9 +197,7 @@ GROUP BY time_bucket
 ORDER BY avg_engagement_rate_pct DESC;
 
 
--- ============================================================
 -- 6. MONTHLY TRENDS
--- ============================================================
 
 -- Monthly performance over time
 SELECT
@@ -239,11 +224,9 @@ GROUP BY month
 ORDER BY month;
 
 
--- ============================================================
 -- 7. ENGAGEMENT DEEP DIVE
--- ============================================================
 
--- Breakdown of what drives engagement (likes vs comments vs shares)
+-- Breakdown of what drives engagement
 SELECT
     platform,
     ROUND(AVG(likes), 0)                AS avg_likes,
@@ -257,7 +240,7 @@ GROUP BY platform
 ORDER BY platform;
 
 
--- High reach but low engagement (underperforming posts)
+-- High reach but low engagement
 SELECT
     date,
     platform,
@@ -271,7 +254,7 @@ ORDER BY reach DESC
 LIMIT 10;
 
 
--- Low reach but high engagement (hidden gems)
+-- Low reach but high engagement 
 SELECT
     date,
     platform,
@@ -285,9 +268,7 @@ ORDER BY engagement_rate DESC
 LIMIT 10;
 
 
--- ============================================================
 -- 8. CONVERSION ANALYSIS
--- ============================================================
 
 -- Which platform + content type combo converts best?
 SELECT
@@ -313,9 +294,7 @@ GROUP BY platform
 ORDER BY click_to_conversion_pct DESC;
 
 
--- ============================================================
 -- 9. FINAL SUMMARY VIEW
--- ============================================================
 
 -- Executive summary — one row per platform
 SELECT
